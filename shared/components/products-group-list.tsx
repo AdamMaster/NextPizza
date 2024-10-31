@@ -4,7 +4,7 @@ import { useIntersection } from 'react-use'
 import { Title } from './ui'
 import { cn } from '@/shared/lib/utils'
 import { ProductCard } from './product-card'
-import { useCategoryStore } from '../store/category'
+import { useCategoryStore } from '../store/useCategoryStore'
 
 interface Props {
   title: string

@@ -76,22 +76,22 @@ async function up() {
   await prisma.productVariation.createMany({
     data: [
       // Пицца "Пепперони фреш"
-      { productId: pizza1.id, pizzaType: 1, price: randomNumber(190, 600), size: 20 },
-      { productId: pizza1.id, pizzaType: 2, price: randomNumber(190, 600), size: 30 },
-      { productId: pizza1.id, pizzaType: 2, price: randomNumber(190, 600), size: 40 },
+      { productId: pizza1.id, pizzaType: 1, size: 20, price: randomNumber(190, 600) },
+      { productId: pizza1.id, pizzaType: 2, size: 30, price: randomNumber(190, 600) },
+      { productId: pizza1.id, pizzaType: 2, size: 40, price: randomNumber(190, 600) },
 
       // Пицца "Сырная"
-      { productId: pizza2.id, pizzaType: 1, price: randomNumber(190, 600), size: 20 },
-      { productId: pizza2.id, pizzaType: 1, price: randomNumber(190, 600), size: 30 },
-      { productId: pizza2.id, pizzaType: 1, price: randomNumber(190, 600), size: 40 },
-      { productId: pizza2.id, pizzaType: 2, price: randomNumber(190, 600), size: 20 },
-      { productId: pizza2.id, pizzaType: 2, price: randomNumber(190, 600), size: 30 },
-      { productId: pizza2.id, pizzaType: 2, price: randomNumber(190, 600), size: 40 },
+      { productId: pizza2.id, pizzaType: 1, size: 20, price: randomNumber(190, 600) },
+      { productId: pizza2.id, pizzaType: 1, size: 30, price: randomNumber(190, 600) },
+      { productId: pizza2.id, pizzaType: 1, size: 40, price: randomNumber(190, 600) },
+      { productId: pizza2.id, pizzaType: 2, size: 20, price: randomNumber(190, 600) },
+      { productId: pizza2.id, pizzaType: 2, size: 30, price: randomNumber(190, 600) },
+      { productId: pizza2.id, pizzaType: 2, size: 40, price: randomNumber(190, 600) },
 
       // Пицца "Чоризо Фреш"
-      { productId: pizza3.id, pizzaType: 1, price: randomNumber(190, 600), size: 20 },
-      { productId: pizza3.id, pizzaType: 2, price: randomNumber(190, 600), size: 30 },
-      { productId: pizza3.id, pizzaType: 2, price: randomNumber(190, 600), size: 40 },
+      { productId: pizza3.id, pizzaType: 1, size: 20, price: randomNumber(190, 600) },
+      { productId: pizza3.id, pizzaType: 2, size: 30, price: randomNumber(190, 600) },
+      { productId: pizza3.id, pizzaType: 2, size: 40, price: randomNumber(190, 600) },
 
       // Остальные продукты
       { productId: 1, price: randomNumber(190, 600) },
@@ -133,7 +133,7 @@ async function up() {
     data: {
       productVariationId: 1,
       cartId: 1,
-      quantity: 2,
+      quantity: 1,
       ingredients: {
         connect: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]
       }
