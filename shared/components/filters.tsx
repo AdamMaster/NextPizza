@@ -62,7 +62,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
     router.push(`?${query}`, {
       scroll: false
     })
-  }, [selectedTypes, selectedSizes, selectedPrices, selectedIngredients, router])
+  }, [selectedTypes, selectedSizes, selectedPrices, selectedIngredients])
 
   return (
     <div className={cn('', className)}>

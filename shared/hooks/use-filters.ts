@@ -33,14 +33,17 @@ export const useFilters = () => {
     priceTo: Number(searchParams.get('priceTo')) || undefined
   })
 
-  return {
-    selectedSizes,
-    toggleSelectedSizes,
-    selectedTypes,
-    toggleSelectedTypes,
-    selectedIngredients,
-    toggleSelectedIngredients,
-    selectedPrices,
-    setSelectedPrice
-  }
+  return React.useMemo(
+    () => ({
+      selectedSizes,
+      toggleSelectedSizes,
+      selectedTypes,
+      toggleSelectedTypes,
+      selectedIngredients,
+      toggleSelectedIngredients,
+      selectedPrices,
+      setSelectedPrice
+    }),
+    [selectedSizes, selectedTypes, selectedIngredients, selectedPrices]
+  )
 }

@@ -48,6 +48,10 @@ html {
   font-family: var(--font-nunito), sans-serif;
 }
 
+*:focus {
+  outline: none;
+}
+
 .scrollbar::-webkit-scrollbar {
   width: 4px;
 }

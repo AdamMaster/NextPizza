@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { getCartDetails } from '../lib'
 import { Api } from '../services/api-client'
+import { CreateCartItemValues } from '../services/dto/cart.dto'
 
 export type CartStateItem = {
   id: number
@@ -11,6 +12,7 @@ export type CartStateItem = {
   pizzaSize?: number | null
   pizzaType?: number | null
   ingredients: Array<{ name: string; price: number }>
+  disabled?: boolean
 }
 
 export interface CartState {
@@ -18,17 +20,9 @@ export interface CartState {
   error: boolean
   totalAmount: number
   items: CartStateItem[]
-
-  /* Запрос на получение товаров из корзины */
   fetchCartItems: () => Promise<void>
-
-  /* Запрос на Обновление количества товара */
   updateItemQuantity: (id: number, quantity: number) => Promise<void>
-
-  /* Запрос на добавление товара в корзину */
   addCartItem: (values: any) => Promise<void>
-
-  /* Запрос на удаление товара из корзины */
   removeCartItem: (id: number) => Promise<void>
 }
 
@@ -65,15 +59,34 @@ export const useCartStore = create<CartState>((set, get) => ({
   },
   removeCartItem: async (id: number) => {
     try {
-      set({ loading: true, error: false })
+      set(state => ({
+        loading: true,
+        error: false,
+        items: state.items.map(item => (item.id === id ? { ...item, disabled: true } : item))
+      }))
       const data = await Api.cart.removeCartItem(id)
       set(getCartDetails(data))
     } catch (error) {
       console.error(error)
       set({ error: true })
     } finally {
-      set({ loading: false })
+      set(state => ({
+        loading: false,
+        items: state.items.map(item => ({ ...item, disabled: false }))
+      }))
     }
   },
-  addCartItem: async (values: any) => {}
+  addCartItem: async (values: CreateCartItemValues) => {
+    try {
+      set({ loading: true, error: false })
+      const data = await Api.cart.addCartItem(values)
+      set(getCartDetails(data))
+      console.log('go')
+    } catch (error) {
+      console.error(error)
+      set({ error: true })
+    } finally {
+      set({ loading: false })
+    }
+  }
 }))
