@@ -3,9 +3,9 @@ import { CheckoutItemDetails } from './checkout-item-details'
 import { ArrowRight, Package, Percent, Truck } from 'lucide-react'
 import { Button, Skeleton } from './ui'
 import { WhiteBlock } from './white-block'
-
-const VAT = 15
-const DELIVERY_PRICE = 250
+import { calcOrderPrice } from '../lib'
+import { deliveryPrice, vat } from '../constants'
+import { useCartStore } from '../store'
 
 interface Props {
   totalAmount: number
@@ -14,8 +14,9 @@ interface Props {
 }
 
 export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, className }) => {
-  const vatPrice = (totalAmount * VAT) / 100
-  const totalPrice = totalAmount + DELIVERY_PRICE + vatPrice
+  const vatPrice = (totalAmount * vat) / 100
+  const totalPrice = totalAmount + deliveryPrice + vatPrice
+  const { items } = useCartStore()
 
   return (
     <WhiteBlock className='p-6 sticky top-4'>
@@ -24,7 +25,9 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
         {loading ? (
           <Skeleton className='w-48 h-10 rounded-[8px]' />
         ) : (
-          <span className='text-[34px] font-extrabold leading-10'>{totalPrice} ₽</span>
+          <span className='text-[34px] font-extrabold leading-10'>
+            {items.length > 0 ? calcOrderPrice(totalAmount) : 0} ₽
+          </span>
         )}
       </div>
 
@@ -53,9 +56,9 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
             Доставка:
           </div>
         }
-        value={loading ? <Skeleton className='w-14 h-7 rounded-[8px]' /> : `${DELIVERY_PRICE} ₽`}
+        value={loading ? <Skeleton className='w-14 h-7 rounded-[8px]' /> : `${deliveryPrice} ₽`}
       />
-      <Button className='w-full h-14 rounded-2xl mt-6 text-base font-bold' type='submit'>
+      <Button loading={loading} className='w-full h-14 rounded-2xl mt-6 text-base font-bold' type='submit'>
         Перейти к оплате
         <ArrowRight className='w-5 ml-2' />
       </Button>

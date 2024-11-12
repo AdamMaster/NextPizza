@@ -76,22 +76,22 @@ async function up() {
   await prisma.productVariation.createMany({
     data: [
       // Пицца "Пепперони фреш"
-      { productId: pizza1.id, pizzaType: 1, size: 20, price: randomNumber(190, 600) },
-      { productId: pizza1.id, pizzaType: 2, size: 30, price: randomNumber(190, 600) },
-      { productId: pizza1.id, pizzaType: 2, size: 40, price: randomNumber(190, 600) },
+      { productId: pizza1.id, pizzaType: 1, size: 20, price: 350 },
+      { productId: pizza1.id, pizzaType: 2, size: 30, price: 480 },
+      { productId: pizza1.id, pizzaType: 2, size: 40, price: 580 },
 
       // Пицца "Сырная"
-      { productId: pizza2.id, pizzaType: 1, size: 20, price: randomNumber(190, 600) },
-      { productId: pizza2.id, pizzaType: 1, size: 30, price: randomNumber(190, 600) },
-      { productId: pizza2.id, pizzaType: 1, size: 40, price: randomNumber(190, 600) },
-      { productId: pizza2.id, pizzaType: 2, size: 20, price: randomNumber(190, 600) },
-      { productId: pizza2.id, pizzaType: 2, size: 30, price: randomNumber(190, 600) },
-      { productId: pizza2.id, pizzaType: 2, size: 40, price: randomNumber(190, 600) },
+      { productId: pizza2.id, pizzaType: 1, size: 20, price: 330 },
+      { productId: pizza2.id, pizzaType: 1, size: 30, price: 480 },
+      { productId: pizza2.id, pizzaType: 1, size: 40, price: 720 },
+      { productId: pizza2.id, pizzaType: 2, size: 20, price: 330 },
+      { productId: pizza2.id, pizzaType: 2, size: 30, price: 480 },
+      { productId: pizza2.id, pizzaType: 2, size: 40, price: 720 },
 
       // Пицца "Чоризо Фреш"
-      { productId: pizza3.id, pizzaType: 1, size: 20, price: randomNumber(190, 600) },
-      { productId: pizza3.id, pizzaType: 2, size: 30, price: randomNumber(190, 600) },
-      { productId: pizza3.id, pizzaType: 2, size: 40, price: randomNumber(190, 600) },
+      { productId: pizza3.id, pizzaType: 1, size: 20, price: 420 },
+      { productId: pizza3.id, pizzaType: 2, size: 30, price: 570 },
+      { productId: pizza3.id, pizzaType: 2, size: 40, price: 720 },
 
       // Остальные продукты
       { productId: 1, price: randomNumber(190, 600) },
