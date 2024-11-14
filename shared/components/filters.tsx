@@ -37,6 +37,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
   const { ingredientsData, loading } = useFilterIngredients()
   const ingredientItems = ingredientsData.map(item => ({ value: String(item.id), text: item.name }))
+  const isMounted = React.useRef(false)
 
   const updatePrice = (name: keyof PriceProps, value: number) => {
     setSelectedPrice({
@@ -48,20 +49,23 @@ export const Filters: React.FC<Props> = ({ className }) => {
   const router = useRouter()
 
   React.useEffect(() => {
-    const params = {
-      ...selectedPrices,
-      selectedTypes: Array.from(selectedTypes),
-      selectedSizes: Array.from(selectedSizes),
-      selectedIngredients: Array.from(selectedIngredients)
+    if (isMounted.current) {
+      const params = {
+        ...selectedPrices,
+        selectedTypes: Array.from(selectedTypes),
+        selectedSizes: Array.from(selectedSizes),
+        selectedIngredients: Array.from(selectedIngredients)
+      }
+
+      const query = qs.stringify(params, {
+        arrayFormat: 'comma'
+      })
+
+      router.push(`?${query}`, {
+        scroll: false
+      })
     }
-
-    const query = qs.stringify(params, {
-      arrayFormat: 'comma'
-    })
-
-    router.push(`?${query}`, {
-      scroll: false
-    })
+    isMounted.current = true
   }, [selectedTypes, selectedSizes, selectedPrices, selectedIngredients])
 
   return (
