@@ -1,16 +1,17 @@
+'use client'
 import React from 'react'
 import { Button, Dialog, DialogContent, DialogTitle } from '@/shared/components/ui'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import { LoginForm } from './forms/login-form'
+import { RegisterForm } from './forms/register-form'
 
 interface Props {
-  className?: string
   open: boolean
   onClose: () => void
 }
 
-export const AuthModal: React.FC<Props> = ({ className, open, onClose }) => {
+export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
   const [type, setType] = React.useState<'login' | 'register'>('login')
   const onSwitchType = () => {
     setType(type === 'login' ? 'register' : 'login')
@@ -24,7 +25,7 @@ export const AuthModal: React.FC<Props> = ({ className, open, onClose }) => {
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogTitle></DialogTitle>
       <DialogContent className='w-[450px] bg-white p-10'>
-        {type === 'login' ? <LoginForm onClose={handleClose} /> : 'Register'}
+        {type === 'login' ? <LoginForm onClose={handleClose} /> : <RegisterForm onClose={handleClose} />}
         <hr />
         <div className='flex gap-2'>
           <Button
@@ -48,7 +49,7 @@ export const AuthModal: React.FC<Props> = ({ className, open, onClose }) => {
           </Button>
         </div>
         <Button variant='outline' onClick={onSwitchType} type='button' className='h-12'>
-          {type === 'login' ? 'Войти' : 'Регистрация'}
+          {type !== 'login' ? 'Войти' : 'Регистрация'}
         </Button>
       </DialogContent>
     </Dialog>
