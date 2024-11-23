@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { RequiredSymbol } from '../required-symbol'
 import { Input } from '../ui'
