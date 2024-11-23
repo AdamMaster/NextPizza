@@ -43,7 +43,7 @@ export const FormAddress: React.FC<Props> = ({ name, label, required, className,
           name='address'
           render={({ field, fieldState }) => (
             <>
-              <AddressInput incomingValue={field.value} onChange={field.onChange} />
+              <AddressInput onChange={field.onChange} />
               {fieldState.error?.message && <ErrorText className='mt-2' text={fieldState.error.message} />}
               {field.value && <ClearButton onClick={() => field.onChange('')} />}
             </>
