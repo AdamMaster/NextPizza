@@ -1,7 +1,6 @@
 import { prisma } from '@/prisma/prisma-client'
 import { getUserSession } from '@/shared/lib/get-user-session'
 import { NextResponse } from 'next/server'
-import { use } from 'react'
 
 export const dynamic = 'force-dynamic'
 
