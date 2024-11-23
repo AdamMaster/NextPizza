@@ -30,11 +30,11 @@ export const RegisterForm: React.FC<Props> = ({ onClose, onClickLogin }) => {
       await registerUser({
         email: data.email,
         password: data.password,
-        fullName: data.fullName,
-        confirmPassword: data.confirmPassword
+        fullName: data.fullName
+        // confirmPassword: data.confirmPassword
       })
 
-      toast.error('Регистрация успешна 📝. Подтвердите свою почту')
+      toast.success('Регистрация прошла успешно. Подтвердите свою почту')
 
       onClose?.()
     } catch (error) {

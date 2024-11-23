@@ -168,6 +168,23 @@ export async function registerUser(body: Prisma.UserCreateInput) {
         password: hashSync(body.password, 10)
       }
     })
+
+    const code = Math.floor(100000 + Math.random() * 900000).toString()
+
+    await prisma.verificationCode.create({
+      data: {
+        code,
+        userId: createdUser.id
+      }
+    })
+
+    await sendEmail(
+      createdUser.email,
+      'Next Pizza / Подтверждение регистрации',
+      VerificationUserTemplate({
+        code
+      })
+    )
   } catch (err) {
     console.log('Error [CREATE_USER]', err)
     throw err
