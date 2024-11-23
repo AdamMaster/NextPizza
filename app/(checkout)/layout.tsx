@@ -1,4 +1,5 @@
 import { Container, Header } from '@/shared/components'
+import { Suspense } from 'react'
 
 export const metadata = {
   title: 'Next Pizza | Корзина',
@@ -9,7 +10,9 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
   return (
     <main className='min-h-screen bg-[#f4f1ee]'>
       <Container>
-        <Header hasSearch={false} hasCart={false} />
+        <Suspense>
+          <Header hasSearch={false} hasCart={false} />
+        </Suspense>
         {children}
       </Container>
     </main>
